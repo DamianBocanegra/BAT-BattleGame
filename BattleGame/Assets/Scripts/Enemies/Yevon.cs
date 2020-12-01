@@ -26,29 +26,29 @@ public class Yevon : Unit
             {
                 ultimateDamage = baseDamage;
             }
-            dmg  = 0;
+            dmgOutput  = 0;
 
             return "Yevon is gathering energy!";
         }
         else if(diceRoll >= 3)
         {
-            dmg = baseDamage;
+            dmgOutput = baseDamage;
             return "Yevon is attacking!";
         }
 
         else if(diceRoll >= 1)
         {
             blocking = true;
-            dmg = 0;
+            dmgOutput = 0;
             return "Yevon is moving into a defense position!";
         }
         else
         {
-            dmg = ultimateDamage;
+            dmgOutput = ultimateDamage;
             return "A unmesureable energy is being unleashed!!";
 
         }
-        dmg = 0;
+        dmgOutput = 0;
         return "ERROR!";
     }
 }
