@@ -4,39 +4,35 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
+    //StatsChart
     public string unitName;
     public int level;
-    public int dmg;
+    public int dmgOutput;
     public int maxHP;
     public int currentHP;
+    
+    //Basic Conditions
     public bool blocking = false;
+    private bool alive = true;
 
-    public bool takeDamage(int damage, bool blocking)
+    public void takeDamage(int damage, bool blocking)
     {
         //Damage calc return if blocking
-        if(blocking)
+        if(!blocking)
         {
-            return false;
-        }
-        else
-        {
-            currentHP -= damage;   
+            currentHP -= damage;
         }
         
         //Determine dead
         if(currentHP <= 0)
         {
-            return true;
-        }
-        else 
-        {
-            return false;
+            alive = false;
         }
     }
 
     public void Heal()
     {
-        currentHP += dmg + 10;
+        currentHP += dmgOutput + 10;
         if(currentHP >= maxHP)
         {
             currentHP = maxHP;
@@ -53,8 +49,36 @@ public class Unit : MonoBehaviour
         blocking = false;
     }
 
+    public bool isAlive()
+    {
+        return alive;
+    }
+
     public virtual string makeDesicion()
     {
         return "Override me!";
+    }
+
+    public virtual void basicAbility(Unit u)
+    {
+        Debug.Log("I was not overriden");
+        return;
+    }
+
+    public virtual void specialAbilityOne(Unit u)
+    {
+        Debug.Log("I was not overriden");
+        return;
+    }
+    public virtual void specialAbilityTwo(Unit u)
+    {
+        Debug.Log("I was not overriden");
+        return;
+    }
+
+    public virtual void checkConditions()
+    {
+        Debug.Log("I was not overriden");
+        return;
     }
 }

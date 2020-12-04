@@ -61,8 +61,8 @@ public class BattleSystem : MonoBehaviour
     
     IEnumerator PlayerAttack()
     {
-        
-        bool isdead = enemyUnit.takeDamage(playerUnit.dmg, enemyUnit.blocking);
+        playerUnit.basicAbility(enemyUnit);
+        bool isAlive = enemyUnit.isAlive();
         enemyHUD.setHP(enemyUnit.currentHP);
 
         if(enemyUnit.blocking)
@@ -76,7 +76,7 @@ public class BattleSystem : MonoBehaviour
         }
         yield return new WaitForSeconds(2f);
 
-        if(isdead)
+        if(!isAlive)
         {
             state = battleStates.WIN;
             EndBattle();
@@ -92,7 +92,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator PlayerHeal()
     {
         
-        playerUnit.Heal();
+        playerUnit.specialAbilityOne(enemyUnit);
         playerHUD.setHP(playerUnit.currentHP);
         dialouge.text = playerUnit.unitName + " is recovering!";
         yield return new WaitForSeconds(2f);
@@ -104,7 +104,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerBlock()
     {
-        playerUnit.Block();
+        playerUnit.specialAbilityTwo(enemyUnit);
         dialouge.text = playerUnit.unitName + " moving to defensive position!";
         yield return new WaitForSeconds(2f);
 
@@ -117,17 +117,23 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EnemyTurn()
     {
         dialouge.text = enemyUnit.makeDesicion();
-        bool isdead = playerUnit.takeDamage(enemyUnit.dmg, playerUnit.blocking);
+        if(playerUnit.blocking)
+        {
+            dialouge.text = playerUnit.unitName + " has blocked!";
+            playerUnit.endBlock();
+        }
+        else
+        {
+            playerUnit.takeDamage(enemyUnit.dmgOutput, playerUnit.blocking);
+        }
+
+        bool isAlive = playerUnit.isAlive();
+       
         playerHUD.setHP(playerUnit.currentHP);
 
         yield return new WaitForSeconds(2f);
 
-
-        if(playerUnit.blocking == true)
-        {
-            playerUnit.endBlock();
-        }
-        if(isdead)
+        if(!isAlive)
         {
             state = battleStates.LOSS;
             EndBattle();
