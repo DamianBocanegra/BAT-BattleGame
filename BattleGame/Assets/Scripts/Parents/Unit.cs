@@ -65,12 +65,12 @@ public class Unit : MonoBehaviour
         return;
     }
 
-    public virtual void specialAbilityOne()
+    public virtual void specialAbilityOne(Unit u)
     {
         Debug.Log("I was not overriden");
         return;
     }
-    public virtual void specialAbilityTwo()
+    public virtual void specialAbilityTwo(Unit u)
     {
         Debug.Log("I was not overriden");
         return;
