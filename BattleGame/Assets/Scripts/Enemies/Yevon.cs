@@ -5,50 +5,80 @@ using UnityEngine;
 public class Yevon : Unit
 {
     private int baseDamage = 10;
-    private int ultimateDamage = 0;
+    private int charge = 0;
+    private bool charged = false;
 
     //Dice rolls
     //9 8 7 6 = charge ultimate
     //5 4 3 = basic
     //3 2 1 = block
     //0 = ultimate 
-    public override string makeDesicion()
+    public override string makeDesicion(Unit unit)
     {
-        int diceRoll = Random.Range(0, 10);
-
-        if(diceRoll >= 6)
+        if(unit.currentHP <= baseDamage)
         {
-            if(ultimateDamage != 0)
-            {
-                ultimateDamage = ultimateDamage * 2;
-            }
-            else
-            {
-                ultimateDamage = baseDamage;
-            }
-            dmgOutput  = 0;
-
-            return "Yevon is gathering energy!";
-        }
-        else if(diceRoll >= 3)
-        {
-            dmgOutput = baseDamage;
-            return "Yevon is attacking!";
+            basicAbility(unit);
+            return "Yevon is attacking!"; 
         }
 
-        else if(diceRoll >= 1)
+        if(charge == 5)
         {
-            blocking = true;
-            dmgOutput = 0;
-            return "Yevon is moving into a defense position!";
+            specialAbilityTwo(unit);
+            return "Yevon has unleashed an unmesurable energy field!";
+        }
+
+        if(charged)
+        {
+            basicAbility(unit);
+            charged = false;
+            return "Yevon is attacking";
         }
         else
         {
-            dmgOutput = ultimateDamage;
-            return "A unmesureable energy is being unleashed!!";
-
+            specialAbilityOne(unit);
+            charged = true;
+            return "Yevon is gathering energy";
         }
-        dmgOutput = 0;
-        return "ERROR!";
+
+
     }
+
+
+    /*
+        Name: Purge Swipe
+        Decription: Deal Physical damage to target.
+    */
+    public override void basicAbility(Unit unit)
+    {
+        unit.takeDamage(baseDamage, unit.blocking);
+    }
+ 
+
+    /*
+        Name: Gather Energy
+        Decription: Yevon is given one stack of charge
+
+        Charge: This unit's damage output is increased by 10%
+    */
+    public override void specialAbilityOne(Unit unit)
+    {
+        charge += 1;
+    }
+
+    /*
+        Name: Judgement Blast
+        Description: Yevon loses all stacks of charge and deals damage to the target.
+        This damage is double for every stack lost.
+    */ 
+    public override void specialAbilityTwo(Unit unit)
+    {
+        dmgOutput = baseDamage;
+        while(charge != 0)
+        {
+            dmgOutput = dmgOutput * 2;
+            charge -= 1;
+        }
+        unit.takeDamage(dmgOutput, unit.blocking);
+    }
+
 }
