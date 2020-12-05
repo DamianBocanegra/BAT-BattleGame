@@ -10,6 +10,9 @@ public class BattleSystem : MonoBehaviour
     
     //UI
     public Text dialouge;
+    public Text btnOne;
+    public Text btnTwo;
+    public Text btnThree;
 
     public battleStates state;
 
@@ -39,6 +42,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator SetupBattle()
     {
+        //Spawn Player and Enemy
         GameObject playerGO = Instantiate(player, playerStation);
         playerUnit = playerGO.GetComponent<Unit>();
         
@@ -46,6 +50,10 @@ public class BattleSystem : MonoBehaviour
         enemyUnit = enemyGO.GetComponent<Unit>();
 
         dialouge.text = enemyUnit.unitName + " has appeared!"; 
+
+
+        //Set Player Ablities
+        //btnOne.text = playerUnit.abilityList[0];
 
         playerHUD.setHUD(playerUnit);
         enemyHUD.setHUD(enemyUnit);

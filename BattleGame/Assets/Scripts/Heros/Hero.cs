@@ -6,6 +6,11 @@ public class Hero : Unit
 {
     //Conditions
     private bool stunned = false;
+
+    void Awake()
+    {
+        UNITID = "HERO";
+    }
     
 
     //Hero's basic:
