@@ -116,15 +116,11 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyTurn()
     {
-        dialouge.text = enemyUnit.makeDesicion();
+        dialouge.text = enemyUnit.makeDesicion(playerUnit);
         if(playerUnit.blocking)
         {
             dialouge.text = playerUnit.unitName + " has blocked!";
             playerUnit.endBlock();
-        }
-        else
-        {
-            playerUnit.takeDamage(enemyUnit.dmgOutput, playerUnit.blocking);
         }
 
         bool isAlive = playerUnit.isAlive();
