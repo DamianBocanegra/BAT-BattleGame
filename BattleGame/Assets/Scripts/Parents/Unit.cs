@@ -54,7 +54,7 @@ public class Unit : MonoBehaviour
         return alive;
     }
 
-    public virtual string makeDesicion()
+    public virtual string makeDesicion(Unit u)
     {
         return "Override me!";
     }
