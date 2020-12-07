@@ -1472,6 +1472,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialouge: {fileID: 64136144}
+  btnOne: {fileID: 2049563929}
+  btnTwo: {fileID: 826184294}
+  btnThree: {fileID: 1001230057}
   state: 0
   player: {fileID: 1002263582581853034, guid: 39eed47301960804380421c38a11e93e, type: 3}
   enemy: {fileID: 8127034564829902097, guid: 551a6ca5cb81d35489d83c309bf2bda6, type: 3}
