@@ -53,7 +53,9 @@ public class BattleSystem : MonoBehaviour
 
 
         //Set Player Ablities
-        //btnOne.text = playerUnit.abilityList[0];
+        btnOne.text = playerUnit.basicAbilityName;
+        btnTwo.text = playerUnit.specialAbilityOneName;
+        btnThree.text = playerUnit.specialAbilityTwoName;
 
         playerHUD.setHUD(playerUnit);
         enemyHUD.setHUD(enemyUnit);

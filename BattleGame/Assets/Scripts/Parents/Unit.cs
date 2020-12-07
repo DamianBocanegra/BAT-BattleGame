@@ -15,7 +15,10 @@ public class Unit : MonoBehaviour
     public bool blocking = false;
     private bool alive = true;
 
-    public string UNITID;
+    //AbilityNames
+    public string basicAbilityName;
+    public string specialAbilityOneName;
+    public string specialAbilityTwoName;
 
     public void takeDamage(int damage, bool blocking)
     {

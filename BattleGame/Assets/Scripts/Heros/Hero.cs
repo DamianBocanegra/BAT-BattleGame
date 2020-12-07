@@ -9,7 +9,9 @@ public class Hero : Unit
 
     void Awake()
     {
-        UNITID = "HERO";
+        basicAbilityName = "Brave Strike";
+        specialAbilityOneName = "Hero's Retreat";
+        specialAbilityTwoName = "Play Defense!";
     }
     
 
