@@ -25,6 +25,8 @@ public class BattleSystem : MonoBehaviour
     private Unit playerUnit;
     private Unit enemyUnit;
 
+    private GameKeeper keeper;
+
     public BattleHUD playerHUD;
     public BattleHUD enemyHUD;
     
@@ -32,6 +34,9 @@ public class BattleSystem : MonoBehaviour
     void Start()
     {
         state = battleStates.START;
+        
+        //FIND HOW TO GET ACTIVE GAME MANGER!
+        keeper = GameObject.Find("GameManager");
         StartCoroutine(SetupBattle());
     }
 
@@ -43,7 +48,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator SetupBattle()
     {
         //Spawn Player and Enemy
-        GameObject playerGO = Instantiate(player, playerStation);
+        GameObject playerGO = Instantiate(keeper.getPlayerOne(), playerStation);
         playerUnit = playerGO.GetComponent<Unit>();
         
         GameObject enemyGO = Instantiate(enemy, enemyStation);

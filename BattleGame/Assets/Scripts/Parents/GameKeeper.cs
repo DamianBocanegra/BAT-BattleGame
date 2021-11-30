@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameKeeper : MonoBehaviour
 {
@@ -25,21 +26,27 @@ public class GameKeeper : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
+
+    public Unit getPlayerOne()
+    {
+        return playerOne;
+    }
     
 
     public void selectHero()
     {
         playerOne = players[0];
     }
-    // Start is called before the first frame update
-    void Start()
+    public void selectYevon()
     {
-        
+        enemyOne = enemies[0];
     }
 
-    // Update is called once per frame
-    void Update()
+    public void moveToEnemySelect()
     {
-        
+        if(playerOne != null)
+        {
+            SceneManager.LoadScene("MainBattle");
+        }
     }
 }
